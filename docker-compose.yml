@@ -1,0 +1,51 @@
+version: "3"
+
+services:
+  # Frontend
+  app:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    networks:
+      - profession_link_network
+
+  # Backend
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3000"
+    depends_on:
+      - postgres # Agora o contêiner do servidor depende do contêiner do PostgreSQL
+    environment:
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_USER=your_db_user
+      - DB_PASSWORD=your_db_password
+      - DB_NAME=your_db_name
+    networks:
+      - profession_link_network
+
+  # PostgreSQL
+  postgres:
+    image: postgres:latest # Usa a imagem oficial do PostgreSQL no Docker Hub
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=your_db_user
+      - POSTGRES_PASSWORD=your_db_password
+      - POSTGRES_DB=your_db_name
+    volumes:
+      - postgres_data:/var/lib/postgresql/data # Mapeia um volume para persistir os dados do PostgreSQL
+    networks:
+      - profession_link_network
+
+volumes:
+  postgres_data: # Define o volume para o PostgreSQL
+
+networks:
+  profession_link_network:
+    driver: bridge
