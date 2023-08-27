@@ -6,18 +6,21 @@ export default class ProfessionModel {
   private _situacao: boolean;
   private _updatedAt: Date;
   private _createdAt: Date;
+  private _deletedAt: Date;
 
   constructor(
     descricao: string,
     situacao: boolean,
     updatedAt: Date,
     createdAt: Date,
+    deletedAt: Date,
   ) {
     this._id = uuidv4();
     this._descricao = descricao;
     this._situacao = situacao;
     this._updatedAt = updatedAt;
     this._createdAt = createdAt;
+    this._deletedAt = deletedAt;
   }
 
   get id(): string {
@@ -52,16 +55,26 @@ export default class ProfessionModel {
     return this._createdAt;
   }
 
+  get deletedAt(): Date {
+    return this._deletedAt;
+  }
+
+  set deletedAt(value: Date) {
+    this._deletedAt = value;
+  }
+
   fillFields(
     descricao: string,
     situacao: boolean,
     updatedAt: Date,
     createdAt: Date,
+    deletedAt: Date,
   ): void {
     this._descricao = descricao;
     this._situacao = situacao;
     this._updatedAt = updatedAt;
     this._createdAt = createdAt;
+    this._deletedAt = deletedAt;
   }
 
   // Método para obter o objeto completo
@@ -71,6 +84,7 @@ export default class ProfessionModel {
       this._situacao,
       this._updatedAt,
       this._createdAt,
+      this._deletedAt,
     );
   }
 }

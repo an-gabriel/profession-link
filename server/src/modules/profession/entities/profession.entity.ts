@@ -3,9 +3,9 @@ import { Entity, Column } from 'typeorm';
 
 @Entity()
 export class Profession extends BaseEntity {
-  @Column({ default: '' })
+  @Column()
   private descricao!: string;
 
-  @Column({ default: false })
+  @Column({ default: true })
   private situacao!: boolean;
 }
