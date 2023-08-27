@@ -1,4 +1,4 @@
-# knights service
+# profession link service
 
 Um simples `microserviço` para gerencia o cadastro de cavaleiros e suas informções
 Esta ferramenta foi desenvolvida com Node
@@ -57,4 +57,11 @@ docker-compose up
 
 >___IMPORTANTE___: Para execução das rotas, está disponivel no projeto a pasta postman, basta baixar a colection e a env para utilizar.
 
-ps : Lembrei que preciso colocar o .env, geralmente utilizaria o secrets manager da aws para segurar variaveis de ambiente. 
+ps : Lembrei que preciso colocar o .env, geralmente utilizaria o secrets manager da aws para segurar variaveis de ambiente.
+
+
+
+
+## TYPEORM
+### create migration code exemplo :
+> MODULE=profession FILENAME=CreateProfessionTable npm run migrate:create
