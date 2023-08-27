@@ -1,6 +1,9 @@
 import { Container } from 'inversify';
 
-// import { HealthCheckController } from './modules/health-check/controller/health-check.controller';
+// bind dos controllers
+import { bindControllers } from '../modules/inversify-config/controllers/inversify.controllers.module';
+// bind dos services
+import { bindServices } from '../modules/inversify-config/services/inversify.services.module';
 
 export class DiContainer {
   private static container: Container;
@@ -8,12 +11,9 @@ export class DiContainer {
   public static getContainer(): Container {
     if (!this.container) {
       this.container = new Container();
-      this.registerControllers();
+      bindControllers(this.container);
+      bindServices(this.container);
     }
     return this.container;
-  }
-
-  private static registerControllers(): void {
-    //  this.container.bind<HealthCheckController>(HealthCheckController).toSelf();
   }
 }
