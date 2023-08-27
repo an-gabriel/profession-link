@@ -8,7 +8,9 @@
     "start": "node ./dist/server.js",
     "build": "tsc",
     "lint": "eslint src --ext .ts --fix",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "typeorm": "npx typeorm",
+    "migrate:create": "npm run typeorm migration:create ./src/modules/$MODULE/migrations/$FILENAME"
   },
   "keywords": [],
   "author": "",
