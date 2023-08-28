@@ -6,6 +6,7 @@ import { InversifyExpressServer } from 'inversify-express-utils';
 
 import logger from './logger';
 import { DiContainer } from './di.container';
+import './db.config';
 
 const container = DiContainer.getContainer();
 const server = new InversifyExpressServer(container);

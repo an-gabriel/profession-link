@@ -5,12 +5,13 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsx watch src/server.ts",
-    "start": "node ./dist/server.js",
+    "start": "node dist/src/server.js",
     "build": "tsc",
     "lint": "eslint src --ext .ts --fix",
     "format": "prettier --write .",
     "typeorm": "npx typeorm",
-    "migrate:create": "npm run typeorm migration:create ./src/modules/$MODULE/migrations/$FILENAME"
+    "migrate:create": "npm run typeorm migration:create ./src/modules/$MODULE/migrations/$FILENAME",
+    "migrate:rollback": "npm run typeorm migration:revert"
   },
   "keywords": [],
   "author": "",
@@ -55,7 +56,8 @@
     "pino-http": "^8.3.3",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.1",
-    "typeorm": "^0.3.17",
+    "typeorm": "^0.2.29",
+    "uuid": "^9.0.0",
     "winston": "^3.10.0"
   }
 }

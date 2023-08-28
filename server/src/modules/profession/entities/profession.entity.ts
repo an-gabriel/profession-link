@@ -1,11 +1,11 @@
-import { BaseEntity } from 'common/shared/entity/BaseEntity';
 import { Entity, Column } from 'typeorm';
+import { BaseEntity } from '../../../common/shared/entities/Base.entity';
 
 @Entity()
 export class Profession extends BaseEntity {
-  @Column()
+  @Column({ type: 'varchar' })
   private descricao!: string;
 
-  @Column({ default: true })
+  @Column({ default: true, type: 'boolean' })
   private situacao!: boolean;
 }

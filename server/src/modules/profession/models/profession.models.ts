@@ -6,14 +6,14 @@ export default class ProfessionModel {
   private _situacao: boolean;
   private _updatedAt: Date;
   private _createdAt: Date;
-  private _deletedAt: Date;
+  private _deletedAt?: Date;
 
   constructor(
     descricao: string,
     situacao: boolean,
     updatedAt: Date,
     createdAt: Date,
-    deletedAt: Date,
+    deletedAt?: Date,
   ) {
     this._id = uuidv4();
     this._descricao = descricao;
@@ -55,7 +55,7 @@ export default class ProfessionModel {
     return this._createdAt;
   }
 
-  get deletedAt(): Date {
+  get deletedAt(): Date | undefined {
     return this._deletedAt;
   }
 
@@ -68,7 +68,7 @@ export default class ProfessionModel {
     situacao: boolean,
     updatedAt: Date,
     createdAt: Date,
-    deletedAt: Date,
+    deletedAt?: Date,
   ): void {
     this._descricao = descricao;
     this._situacao = situacao;

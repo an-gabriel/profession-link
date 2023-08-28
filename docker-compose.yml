@@ -29,7 +29,7 @@ services:
     networks:
       - profession_link_network
 
-  # PostgreSQL
+    # PostgreSQL
   postgres:
     image: postgres:latest # Usa a imagem oficial do PostgreSQL no Docker Hub
     ports:
