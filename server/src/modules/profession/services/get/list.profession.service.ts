@@ -1,26 +1,58 @@
-import { Request, Response } from 'express';
-import { injectable } from 'inversify';
-
-import IBaseService from '../../../../common/shared/services/base/IBase.service';
-
-import ProfessionModel from '../../models/profession.models';
+import { Connection } from 'typeorm';
+import { inject, injectable } from 'inversify';
+import { Profession } from '../../entities/profession.entity';
+import { BaseService } from '../../../../common/services/IBase.service';
+import { ProfessionSearchFilter } from '../../interfaces/profession.interface';
 
 @injectable()
-export class ListProfessionService implements IBaseService {
-  constructor() {}
+export class ListProfessionService extends BaseService<Profession> {
+  constructor(
+    @inject('ConnectionFactory')
+    connectionFactory: () => Promise<Connection>,
+  ) {
+    super(connectionFactory);
+  }
 
-  public async execute(req: Request, res: Response): Promise<void> {
-    try {
-      const profession = new ProfessionModel(
-        'test',
-        true,
-        new Date(),
-        new Date(),
-      );
+  async getProfessionById(id: number): Promise<Profession | undefined> {
+    const repository = await this.getRepository(Profession);
+    return await repository.findOne(id);
+  }
 
-      res.status(200).json(profession.getFullObject());
-    } catch (error) {
-      res.status(500).send({ message: (error as Error).message });
+  async getAllProfessions(): Promise<Profession[]> {
+    const repository = await this.getRepository(Profession);
+    return repository.find();
+  }
+
+  async searchProfessions(
+    filters: ProfessionSearchFilter,
+  ): Promise<Profession[]> {
+    const repository = await this.getRepository(Profession);
+
+    const queryBuilder = repository.createQueryBuilder('profession');
+
+    if (filters.id) {
+      queryBuilder.andWhere('profession.id = :id', { id: filters.id });
     }
+    console.log(filters);
+    if (filters.name) {
+      queryBuilder.andWhere('profession.descricao LIKE :descricao', {
+        descricao: filters.name,
+      });
+    }
+
+    if (filters.createdAt) {
+      const createdAtDate = new Date(filters.createdAt);
+      queryBuilder.andWhere('profession.createdAt = :createdAt', {
+        createdAt: createdAtDate,
+      });
+    }
+
+    if (filters.status !== undefined) {
+      queryBuilder.andWhere('profession.situacao = :status', {
+        situacao: filters.status,
+      });
+    }
+
+    return queryBuilder.getMany();
   }
 }
