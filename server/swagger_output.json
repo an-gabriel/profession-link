@@ -1,0 +1,234 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Minha API",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/api/v1/profession/list": {
+      "get": {
+        "summary": "Get a list of professions",
+        "tags": [
+          "Profession"
+        ],
+        "responses": {
+          "200": {
+            "description": "List of professions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "descricao": {
+                        "type": "string"
+                      },
+                      "situacao": {
+                        "type": "boolean"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/profession/create": {
+      "post": {
+        "summary": "Create a new profession",
+        "tags": [
+          "Profession"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "situacao": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Profession created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Profession"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/profession/update/{id}": {
+      "put": {
+        "summary": "Update profession description",
+        "tags": [
+          "Profession"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "ID of the profession to be updated"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "situacao": {
+                    "type": null
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Profession updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Profession"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Profession not found"
+          }
+        }
+      }
+    },
+    "/api/v1/profession/delete/{id}": {
+      "delete": {
+        "summary": "Soft delete a profession",
+        "tags": [
+          "Profession"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "ID of the profession to be deleted"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Profession deleted successfully"
+          },
+          "404": {
+            "description": "Profession not found"
+          }
+        }
+      }
+    },
+    "/api/v1/profession/search": {
+      "get": {
+        "summary": "Search professions",
+        "tags": [
+          "Profession"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "id",
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID of the profession"
+          },
+          {
+            "in": "query",
+            "name": "name",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Name of the profession"
+          },
+          {
+            "in": "query",
+            "name": "createdAt",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Creation date of the profession"
+          },
+          {
+            "in": "query",
+            "name": "status",
+            "schema": {
+              "type": "boolean"
+            },
+            "description": "Status of the profession"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of professions that match the search criteria",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "descricao": {
+                        "type": "string"
+                      },
+                      "situacao": {
+                        "type": "boolean"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {},
+  "tags": []
+}
