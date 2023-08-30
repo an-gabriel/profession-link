@@ -1,23 +1,41 @@
 import 'reflect-metadata';
-import { Container } from 'inversify';
-import { TYPES } from '../src/types/index';
-import { IDbService } from '../src/services/base/IDB.service';
-import { DbService } from '../src/services/base/DB.service';
+import { Container, interfaces } from 'inversify';
+import { bindControllers } from '../src/config/inversify-config/controllers/inversify.controllers.module';
+import { bindServices } from '../src/config/inversify-config/services/inversify.services.module';
+import { Connection, createConnection } from 'typeorm';
 
 describe('Database Connection', () => {
   let container: Container;
-  let dbService: IDbService;
 
-  beforeAll(() => {
+  beforeAll(async () => {
     container = new Container();
-    container.bind<IDbService>(TYPES.IDbService).to(DbService);
 
-    dbService = container.get<IDbService>(TYPES.IDbService);
+    container
+      .bind<interfaces.Factory<Promise<Connection>>>('ConnectionFactory')
+      .toFactory<Promise<Connection>>((context) => {
+        return async () => {
+          try {
+            const connection = await createConnection();
+            console.info('Connection to the database established');
+            return connection;
+          } catch (error) {
+            console.error('Error establishing database connection:', error);
+            throw error;
+          }
+        };
+      });
+
+    bindControllers(container);
+    bindServices(container);
   });
 
-  test('should connect to the database', async () => {
-    const isConnected = await dbService.connect();
+  it('should establish a database connection', async () => {
+    const connectionFactory =
+      container.get<() => Promise<Connection>>('ConnectionFactory');
 
-    expect(isConnected).toBe(true);
+    const connection = await connectionFactory();
+    expect(connection.isConnected).toBeTruthy();
+
+    await connection.close();
   });
 });
