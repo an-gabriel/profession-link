@@ -1,6 +1,15 @@
 import 'reflect-metadata';
-import app from './config/app';
+import { configureServer } from './config/app';
 
-app.listen(3000, () => {
-  console.log('Servidor ouvindo na porta 3000...');
-});
+const port = process.env.PORT || 3000;
+
+async function startServer() {
+  const app = await configureServer();
+
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+  });
+}
+
+startServer();
