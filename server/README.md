@@ -64,4 +64,4 @@ ps : Lembrei que preciso colocar o .env, geralmente utilizaria o secrets manager
 
 ## TYPEORM
 ### create migration code exemplo :
-> MODULE=profession FILENAME=CreateProfessionTable npm run migrate:create
+> npm run migrate:create --name=CreateProfessionalTable --module=professional
