@@ -1,6 +1,6 @@
 import { Connection, Repository } from 'typeorm';
-import { UpdateProfessionService } from '../../../../src/modules/profession/services/update/update.profession.service';
-import { Profession } from '../../../../src/modules/profession/entities/profession.entity';
+import { UpdateProfessionService } from '../../../../../src/modules/profession/services/update/update.profession.service';
+import { Profession } from '../../../../../src/modules/profession/entities/profession.entity';
 
 export default class MockUpdateProfessionService extends UpdateProfessionService {
   private mockRepository: Repository<Profession>;

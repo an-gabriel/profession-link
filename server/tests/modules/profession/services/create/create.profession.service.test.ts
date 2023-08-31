@@ -4,15 +4,18 @@ import ProfessionModel from '../../../../../src/modules/profession/models/profes
 import { Profession } from '../../../../../src/modules/profession/entities/profession.entity';
 
 describe('CreateProfessionService', () => {
-  it('createProfession should create a profession', async () => {
-    const mockRepository: Repository<Profession> = {
+  let mockRepository: Repository<Profession>;
+  let createProfessionService: MockCreateProfessionService;
+
+  beforeEach(() => {
+    mockRepository = {
       save: jest.fn(),
     } as any;
 
-    const createProfessionService = new MockCreateProfessionService(
-      mockRepository,
-    );
+    createProfessionService = new MockCreateProfessionService(mockRepository);
+  });
 
+  it('createProfession should create a profession', async () => {
     const professionName = 'Test Profession';
 
     const mockProfession = new ProfessionModel(
@@ -23,27 +26,24 @@ describe('CreateProfessionService', () => {
     );
 
     (mockRepository.save as jest.Mock).mockResolvedValue(mockProfession);
-    const result =
-      await createProfessionService.createProfession(professionName);
 
-    expect(result).toEqual(mockProfession); // Comparar com o mockProfession
+    const result = await createProfessionService.createProfession({
+      descricao: professionName,
+      situacao: true,
+    });
+
+    expect(result).toEqual(mockProfession);
   });
 
   it('createProfession should not create a profession with invalid input', async () => {
-    const mockRepository: Repository<Profession> = {
-      save: jest.fn(),
-    } as any;
-
-    const createProfessionService = new MockCreateProfessionService(
-      mockRepository,
-    );
-
     const invalidProfessionName = ''; // Nome de profissão inválido
 
     try {
-      await createProfessionService.createProfession(invalidProfessionName);
+      await createProfessionService.createProfession({
+        descricao: invalidProfessionName,
+        situacao: true,
+      });
     } catch (error) {
-      // Esperar que o erro ocorra durante a execução do teste
       expect(error).toBeDefined();
     }
   });
