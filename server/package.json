@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "clean-ts-cache": "node --eval \"console.log(require('typescript').sys.clearScreen());\"",
     "dev": "npm run generate-swagger-json && tsx watch src/server.ts",
     "dev:build": "npm run build && npm run dev",
     "start": "node dist/src/server.js",
@@ -13,6 +14,7 @@
     "typeorm": "npx typeorm",
     "migrate:create": "npm run typeorm migration:create -- -n $npm_config_name -d src/modules/$npm_config_module/migrations",
     "migrate:rollback": "npm run typeorm migration:revert",
+    "migrate:run": "npm run typeorm migration:run",
     "generate-swagger-json": "ts-node src/config/swagger.ts"
   },
   "keywords": [],

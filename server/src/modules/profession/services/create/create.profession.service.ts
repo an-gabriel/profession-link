@@ -14,12 +14,12 @@ export class CreateProfessionService extends BaseService<Profession> {
   }
 
   public async createProfession({
-    name,
+    descricao,
     situacao,
   }: CreateProfessionRequest): Promise<Profession> {
     const profession = new Profession();
 
-    profession.descricao = name;
+    profession.descricao = descricao;
     profession.situacao = situacao;
 
     const repository = await this.getRepository(Profession);

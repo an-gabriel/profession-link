@@ -3,7 +3,7 @@ import { inject, injectable } from 'inversify';
 import { Professional } from '../../entities/professional.entity';
 import { BaseService } from '../../../../common/services/IBase.service';
 import { CreateProfessionalRequest } from '../../interfaces/professional.interface';
-import ProfessionalModel from 'modules/professional/models/professional.models';
+import ProfessionalModel from '../../models/professional.models';
 
 @injectable()
 export class CreateProfessionalService extends BaseService<Professional> {

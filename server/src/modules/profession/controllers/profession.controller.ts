@@ -102,9 +102,9 @@ export class ProfessionController {
     res: Response,
   ) {
     try {
-      const { name, situacao } = req.body;
+      const data = req.body;
       const createdProfession =
-        await this.createProfessionService.createProfession({ name, situacao });
+        await this.createProfessionService.createProfession(data);
       return res.status(201).json(createdProfession);
     } catch (error) {
       logger.error('An error occurred:', error);
@@ -157,12 +157,9 @@ export class ProfessionController {
   ) {
     try {
       const professionId = req.params.id;
-      const { name, situacao } = req.body;
+      const data = req.body;
       const updatedProfession =
-        await this.updateProfessionService.updateProfession(professionId, {
-          name,
-          situacao,
-        });
+        await this.updateProfessionService.updateProfession(professionId, data);
 
       if (updatedProfession) {
         return res.status(200).json(updatedProfession);

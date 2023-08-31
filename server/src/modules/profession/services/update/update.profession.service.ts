@@ -15,14 +15,14 @@ export class UpdateProfessionService extends BaseService<Profession> {
 
   public async updateProfession(
     id: string,
-    { name, situacao }: UpdateProfessionRequest,
+    { descricao, situacao }: UpdateProfessionRequest,
   ): Promise<Profession | undefined> {
     const repository = await this.getRepository(Profession);
     const profession = await repository.findOne(id);
 
     if (profession) {
-      if (name !== undefined) {
-        profession.descricao = name;
+      if (descricao !== undefined) {
+        profession.descricao = descricao;
       }
       if (situacao !== undefined) {
         profession.situacao = situacao;

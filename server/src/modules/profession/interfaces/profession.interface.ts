@@ -1,16 +1,16 @@
 export interface CreateProfessionRequest {
-  name: string;
+  descricao: string;
   situacao: boolean;
 }
 
 export interface UpdateProfessionRequest {
-  name?: string;
+  descricao?: string;
   situacao?: boolean;
 }
 
 export interface ProfessionSearchFilter {
   id?: string;
-  name?: string;
+  descricao?: string;
   createdAt?: Date;
   status?: boolean;
 }
