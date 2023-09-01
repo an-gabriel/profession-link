@@ -1,6 +1,7 @@
-import { Entity, Column, ManyToOne, JoinColumn } from 'typeorm';
-import { BaseEntity } from '../../../common/entities/Base.entity';
 import { Profession } from '../../profession/entities/profession.entity';
+
+import { BaseEntity } from '../../../common/entities/Base.entity';
+import { Column, Entity, ManyToOne, JoinColumn } from 'typeorm';
 
 @Entity()
 export class Professional extends BaseEntity {
@@ -15,7 +16,7 @@ export class Professional extends BaseEntity {
 
   @ManyToOne(() => Profession)
   @JoinColumn({ name: 'tipoDeProfissionalId' })
-  tipoDeProfissional!: Profession;
+  tipoDeProfissional!: string;
 
   @Column({ type: 'boolean', default: true })
   situacao!: boolean;

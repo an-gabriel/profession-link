@@ -2,7 +2,7 @@ export interface CreateProfessionalRequest {
   nome: string;
   telefone: string;
   email: string;
-  tipoDeProfissionalId: string;
+  tipoDeProfissional: string;
   situacao: boolean;
 }
 
@@ -10,7 +10,7 @@ export interface UpdateProfessionalRequest {
   nome?: string;
   telefone?: string;
   email?: string;
-  tipoDeProfissionalId?: number;
+  tipoDeProfissional?: number;
   situacao?: boolean;
 }
 

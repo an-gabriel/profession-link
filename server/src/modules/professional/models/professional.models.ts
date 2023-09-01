@@ -5,7 +5,7 @@ export default class ProfessionalModel {
   private _nome: string;
   private _telefone: string;
   private _email: string;
-  private _tipoDeProfissionalId: string;
+  private _tipoDeProfissional: string;
   private _situacao: boolean;
   private _updatedAt?: Date; // Alterado para ser opcional
   private _createdAt?: Date; // Alterado para ser opcional
@@ -15,7 +15,7 @@ export default class ProfessionalModel {
     nome: string,
     telefone: string,
     email: string,
-    tipoDeProfissionalId: string,
+    tipoDeProfissional: string,
     situacao: boolean,
     updatedAt?: Date,
     createdAt?: Date,
@@ -25,7 +25,7 @@ export default class ProfessionalModel {
     this._nome = nome;
     this._telefone = telefone;
     this._email = email;
-    this._tipoDeProfissionalId = tipoDeProfissionalId;
+    this._tipoDeProfissional = tipoDeProfissional;
     this._situacao = situacao;
 
     if (updatedAt) {
@@ -66,12 +66,12 @@ export default class ProfessionalModel {
     this._email = value;
   }
 
-  get tipoDeProfissionalId(): string {
-    return this._tipoDeProfissionalId;
+  get tipoDeProfissional(): string {
+    return this._tipoDeProfissional;
   }
 
-  set tipoDeProfissionalId(value: string) {
-    this._tipoDeProfissionalId = value;
+  set tipoDeProfissional(value: string) {
+    this._tipoDeProfissional = value;
   }
 
   get situacao(): boolean {
@@ -108,7 +108,7 @@ export default class ProfessionalModel {
       this._nome,
       this._telefone,
       this._email,
-      this._tipoDeProfissionalId,
+      this._tipoDeProfissional,
       this._situacao,
       this._updatedAt,
       this._createdAt,
