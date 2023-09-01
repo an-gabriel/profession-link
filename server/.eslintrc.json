@@ -1,19 +1,21 @@
 {
-  "env": {
-    "es2021": true,
-    "node": true
-  },
-  "plugins": [
-    "@typescript-eslint"
-  ],
   "extends": [
-    "eslint:recommended",
-    "standard-with-typescript",
-    "prettier"
+    "airbnb-base",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:import/typescript"
   ],
+  "plugins": [
+    "@typescript-eslint",
+    "import",
+    "node",
+    "promise"
+  ],
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "ecmaVersion": "latest",
+    "ecmaVersion": 2020, // ou versão compatível com TypeScript
     "sourceType": "module"
   },
-  "rules": {}
+  "rules": {
+    // Adicione regras personalizadas, se necessário
+  }
 }
