@@ -1,3 +1,5 @@
+import 'reflect-metadata';
+
 import 'dotenv/config';
 import cors from 'cors';
 import { InversifyExpressServer } from 'inversify-express-utils';

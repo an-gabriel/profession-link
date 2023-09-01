@@ -1,4 +1,3 @@
-import 'reflect-metadata';
 import { Container } from 'inversify';
 
 import { ListProfessionService } from '../../../modules/profession/services/get/list.profession.service';
