@@ -70,6 +70,45 @@ export class ProfessionalController {
 
   /**
    * @swagger
+   * tags:
+   *   name: Professional
+   *   description: API endpoints for managing professionals
+   *
+   * components:
+   *   schemas:
+   *     Professional:
+   *       type: object
+   *       properties:
+   *         nome:
+   *           type: string
+   *         telefone:
+   *           type: string
+   *         email:
+   *           type: string
+   *         tipoDeProfissional:
+   *           type: string
+   *         situacao:
+   *           type: boolean
+   *
+   *     CreateProfessionalRequest:
+   *       type: object
+   *       properties:
+   *         nome:
+   *           type: string
+   *           example: John Doe
+   *         telefone:
+   *           type: string
+   *           example: 123-456-7890
+   *         email:
+   *           type: string
+   *           example: johndoe@example.com
+   *         tipoDeProfissional:
+   *           type: string
+   *           example: Engineer
+   *         situacao:
+   *           type: boolean
+   *           example: true
+   *
    * /api/v1/professional/create:
    *   post:
    *     summary: Create a new professional
@@ -88,6 +127,7 @@ export class ProfessionalController {
    *             schema:
    *               $ref: '#/components/schemas/Professional'
    */
+
   @httpPost('/create')
   public async createBase(
     req: Request<{}, {}, CreateProfessionalRequest>,
@@ -105,9 +145,47 @@ export class ProfessionalController {
         .json({ error: `An error occurred: ${(error as Error).message}` });
     }
   }
-
   /**
    * @swagger
+   * tags:
+   *   name: Professional
+   *   description: API endpoints for managing professionals
+   *
+   * components:
+   *   schemas:
+   *     Professional:
+   *       type: object
+   *       properties:
+   *         nome:
+   *           type: string
+   *         telefone:
+   *           type: string
+   *         email:
+   *           type: string
+   *         tipoDeProfissional:
+   *           type: string
+   *         situacao:
+   *           type: boolean
+   *
+   *     UpdateProfessionalRequest:
+   *       type: object
+   *       properties:
+   *         nome:
+   *           type: string
+   *           example: John Doe
+   *         telefone:
+   *           type: string
+   *           example: 123-456-7890
+   *         email:
+   *           type: string
+   *           example: johndoe@example.com
+   *         tipoDeProfissional:
+   *           type: number
+   *           example: 1
+   *         situacao:
+   *           type: boolean
+   *           example: true
+   *
    * /api/v1/professional/update/{id}:
    *   put:
    *     summary: Update professional details
@@ -225,7 +303,7 @@ export class ProfessionalController {
    *         name: nome
    *         schema:
    *           type: string
-   *         description: Name of the professional
+   *         description: nome of the professional
    *       - in: query
    *         name: createdAt
    *         schema:

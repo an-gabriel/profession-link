@@ -82,12 +82,12 @@ export class ProfessionController {
    *           schema:
    *             type: object
    *             properties:
-   *               name:
+   *               descricao:
    *                 type: string
    *               situacao:
    *                 type: boolean
    *             required:
-   *               - name
+   *               - descricao
    *     responses:
    *       201:
    *         description: Profession created successfully
@@ -134,12 +134,12 @@ export class ProfessionController {
    *           schema:
    *             type: object
    *             properties:
-   *               name:
+   *               descricao:
    *                 type: string
    *               situacao:
    *                 type:
    *             required:
-   *               - name
+   *               - descricao
    *     responses:
    *       200:
    *         description: Profession updated successfully
@@ -229,10 +229,10 @@ export class ProfessionController {
    *           type: string
    *         description: ID of the profession
    *       - in: query
-   *         name: name
+   *         name: descricao
    *         schema:
    *           type: string
-   *         description: Name of the profession
+   *         description: descricao of the profession
    *       - in: query
    *         name: createdAt
    *         schema:

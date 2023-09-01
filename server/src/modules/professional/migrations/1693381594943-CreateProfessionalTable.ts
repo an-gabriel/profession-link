@@ -24,7 +24,6 @@ export class CreateProfessionalTable1693381594943
             name: 'nome',
             type: 'varchar',
             length: '255',
-            isNullable: false,
           },
           {
             name: 'telefone',

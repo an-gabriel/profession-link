@@ -15,7 +15,7 @@ export class Professional extends BaseEntity {
   email!: string;
 
   @ManyToOne(() => Profession)
-  @JoinColumn({ name: 'tipoDeProfissionalId' })
+  @JoinColumn({ name: 'tipoDeProfissional' })
   tipoDeProfissional!: string;
 
   @Column({ type: 'boolean', default: true })

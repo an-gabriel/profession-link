@@ -33,7 +33,6 @@ export class ListProfessionService extends BaseService<Profession> {
     if (filters.id) {
       queryBuilder.andWhere('profession.id = :id', { id: filters.id });
     }
-    console.log(filters);
     if (filters.descricao) {
       queryBuilder.andWhere('profession.descricao LIKE :descricao', {
         descricao: filters.descricao,

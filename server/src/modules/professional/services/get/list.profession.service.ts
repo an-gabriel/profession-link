@@ -20,7 +20,7 @@ export class ListProfessionalService extends BaseService<Professional> {
 
   async getAllProfessionals(): Promise<Professional[]> {
     const repository = await this.getRepository(Professional);
-    return repository.find();
+    return repository.find({ relations: ['tipoDeProfissional'] });
   }
 
   async searchProfessionals(
