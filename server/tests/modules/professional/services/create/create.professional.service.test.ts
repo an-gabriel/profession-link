@@ -1,21 +1,33 @@
 import { Repository } from 'typeorm';
 import { CreateProfessionalService } from '../../../../../src/modules/professional/services/create/create.professional.service';
-import ProfessionalModel from '../../../../../src/modules/professional/models/professional.models';
 import { CreateProfessionalRequest } from '../../../../../src/modules/professional/interfaces/professional.interface';
 import MockCreateProfessionalService from './MockCreateProfessionalService';
 import { Professional } from '../../../../../src/modules/professional/entities/professional.entity';
+import { Profession } from '../../../../../src/modules/profession/entities/profession.entity';
+import { CreateProfessionService } from '../../../../../src/modules/profession/services/create/create.profession.service';
+import MockCreateProfessionService from '../../../profession/services/create/MockCreateProfessionService';
 
 describe('CreateProfessionalService', () => {
   let createProfessionalService: CreateProfessionalService;
-  let mockRepository: Repository<Professional>;
+  let createProfessionService: CreateProfessionService;
+  let mockProfessionalRepository: Repository<Professional>;
+  let mockProfessionRepository: Repository<Profession>;
 
   beforeEach(() => {
-    mockRepository = {
+    mockProfessionalRepository = {
       save: jest.fn(),
+      findOne: jest.fn(),
+      create: jest.fn(),
+    } as any;
+
+    mockProfessionRepository = {
+      save: jest.fn(),
+      findOne: jest.fn(),
     } as any;
 
     createProfessionalService = new MockCreateProfessionalService(
-      mockRepository,
+      mockProfessionalRepository,
+      mockProfessionRepository,
     );
   });
 
@@ -24,21 +36,30 @@ describe('CreateProfessionalService', () => {
       nome: 'John Doe',
       telefone: '1234567890',
       email: 'john@example.com',
-      tipoDeProfissionalId: '123',
+      tipoDeProfissional: '123',
       situacao: true,
     };
 
-    const createdProfessional = new ProfessionalModel(
-      request.nome,
-      request.telefone,
-      request.email,
-      request.tipoDeProfissionalId,
-      request.situacao,
-      new Date(),
-      new Date(),
-    );
+    const createdProfessional = new Professional();
+    createdProfessional.nome = request.nome;
+    createdProfessional.telefone = request.telefone;
+    createdProfessional.email = request.email;
+    createdProfessional.situacao = request.situacao;
+    createdProfessional.tipoDeProfissional = request.tipoDeProfissional;
+    createdProfessional.createdAt = new Date();
+    createdProfessional.updatedAt = new Date();
 
-    (mockRepository.save as jest.Mock).mockResolvedValue(createdProfessional);
+    (mockProfessionRepository.findOne as jest.Mock).mockResolvedValue({
+      id: '123',
+      name: 'Existing Profession',
+    });
+    (mockProfessionalRepository.create as jest.Mock).mockResolvedValue(
+      createdProfessional,
+    );
+    (mockProfessionalRepository.findOne as jest.Mock).mockResolvedValue(null);
+    (mockProfessionalRepository.save as jest.Mock).mockResolvedValue(
+      createdProfessional,
+    );
 
     const result = await createProfessionalService.createProfessional(request);
 
@@ -53,7 +74,7 @@ describe('CreateProfessionalService', () => {
         nome: invalidProfessionalName,
         telefone: '1234567890',
         email: 'john@example.com',
-        tipoDeProfissionalId: '123',
+        tipoDeProfissional: '123',
         situacao: true,
       });
     } catch (error) {

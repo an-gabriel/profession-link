@@ -6,11 +6,15 @@ export default class MockCreateProfessionService extends CreateProfessionService
   private mockRepository: Repository<Profession>;
 
   constructor(mockRepository: Repository<Profession>) {
-    super(async () => ({}) as Connection); // Fornecer uma função vazia para o connectionFactory
+    super(async () => ({}) as Connection);
     this.mockRepository = mockRepository;
   }
 
   async getRepository(entityClass: any): Promise<Repository<any>> {
     return this.mockRepository;
+  }
+
+  async findOne(id: any): Promise<Profession | undefined> {
+    return new Profession();
   }
 }

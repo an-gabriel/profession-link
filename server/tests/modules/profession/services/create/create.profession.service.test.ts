@@ -36,7 +36,7 @@ describe('CreateProfessionService', () => {
   });
 
   it('createProfession should not create a profession with invalid input', async () => {
-    const invalidProfessionName = ''; // Nome de profissão inválido
+    const invalidProfessionName = '';
 
     try {
       await createProfessionService.createProfession({
